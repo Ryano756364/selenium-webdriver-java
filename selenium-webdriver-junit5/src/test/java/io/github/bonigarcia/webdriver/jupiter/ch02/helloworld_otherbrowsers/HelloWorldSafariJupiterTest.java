@@ -53,7 +53,7 @@ class HelloWorldSafariJupiterTest {
 
     @AfterEach
     void teardown() {
-        driver.quit();
+        driver.quit();  // there is a close() method but quit() will close window + shut down browser
     }
 
     @Test
