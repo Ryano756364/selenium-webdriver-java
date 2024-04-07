@@ -27,9 +27,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.safari.SafariOptions;
 
 class HelloWorldSafariJupiterTest {
 
@@ -42,9 +44,11 @@ class HelloWorldSafariJupiterTest {
         assumeThat(browserPath).isPresent();
     }
 
+    // Have a backup browser in the case that one is not available
     @BeforeEach
     void setup() {
-        driver = new SafariDriver();
+        driver = RemoteWebDriver.builder().oneOf(new SafariOptions())
+                .addAlternative(new ChromeOptions()).build();
     }
 
     @AfterEach
