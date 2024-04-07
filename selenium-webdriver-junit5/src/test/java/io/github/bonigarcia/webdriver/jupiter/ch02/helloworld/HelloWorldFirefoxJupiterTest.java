@@ -26,6 +26,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
 import org.slf4j.Logger;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -57,6 +59,8 @@ class HelloWorldFirefoxJupiterTest {
         String sutUrl = "https://bonigarcia.dev/selenium-webdriver-java/";
         driver.get(sutUrl);
         String title = driver.getTitle();
+        SessionId sessionId = ((RemoteWebDriver) driver).getSessionId();
+        assertThat(sessionId).isNotNull();
         log.debug("The title of {} is {}", sutUrl, title);
 
         // Verify
